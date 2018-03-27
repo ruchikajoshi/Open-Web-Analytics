@@ -78,20 +78,20 @@ class PHPMailer {
    * Sets the From email address for the message.
    * @var string
    */
-  public $From              = 'root@localhost';
+  public $From              = 'ruchika@improwised.com';
 
   /**
    * Sets the From name of the message.
    * @var string
    */
-  public $FromName          = 'Root User';
+  public $FromName          = 'Ruchika';
 
   /**
    * Sets the Sender email (Return-Path) of the message.  If not empty,
    * will be sent via -f to sendmail or as 'MAIL FROM' in smtp mode.
    * @var string
    */
-  public $Sender            = '';
+  public $Sender            = 'ruchika@improwised.com';
 
   /**
    * Sets the Subject of the message.
@@ -140,7 +140,7 @@ class PHPMailer {
    * Method to send mail: ("mail", "sendmail", or "smtp").
    * @var string
    */
-  public $Mailer            = 'mail';
+  public $Mailer            = 'smtp';
 
   /**
    * Sets the path of the sendmail program.
@@ -167,7 +167,7 @@ class PHPMailer {
    * by SERVER_NAME is used or 'localhost.localdomain'.
    * @var string
    */
-  public $Hostname          = '';
+  public $Hostname          = 'smtp.gmail.com';
 
   /**
    * Sets the message ID to be used in the Message-Id header.
@@ -188,13 +188,13 @@ class PHPMailer {
    * Hosts will be tried in order.
    * @var string
    */
-  public $Host          = 'localhost';
+  public $Host          = 'smtp.gmail.com';
 
   /**
    * Sets the default SMTP server port.
    * @var int
    */
-  public $Port          = 25;
+  public $Port          = 587;
 
   /**
    * Sets the SMTP HELO of the message (Default is $Hostname).
@@ -207,7 +207,7 @@ class PHPMailer {
    * Options are "", "ssl" or "tls"
    * @var string
    */
-  public $SMTPSecure    = '';
+  public $SMTPSecure    = 'tls';
 
   /**
    * Sets SMTP authentication. Utilizes the Username and Password variables.
@@ -219,13 +219,13 @@ class PHPMailer {
    * Sets SMTP username.
    * @var string
    */
-  public $Username      = '';
+  public $Username      = 'ruchika@improwised.com';
 
   /**
    * Sets SMTP password.
    * @var string
    */
-  public $Password      = '';
+  public $Password      = 'ruchika2696';
 
   /**
    * Sets the SMTP server timeout in seconds.
@@ -827,6 +827,12 @@ class PHPMailer {
    * @access public
    * @return bool
    */
+// public boolean function Mail($a)
+// {
+//   return true;
+// }
+
+
   public function SmtpConnect() {
     if(is_null($this->smtp)) {
       $this->smtp = new SMTP();

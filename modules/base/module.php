@@ -157,7 +157,7 @@ class owa_baseModule extends owa_module {
 			'page_url'						=> array(
 				'default_value'					=> '(not set)',
 				'required'						=> true,
-				'data_type'						=> 'url',
+				'data_type'						=> 'string',
 				'callbacks'						=> array( 'owa_trackingEventHelpers::makeUrlCanonical' )
 			),
 			
@@ -213,13 +213,13 @@ class owa_baseModule extends owa_module {
 			
 			'HTTP_REFERER'					=> array(
 				'required'						=> false,
-				'data_type'						=> 'url',
+				'data_type'						=> 'string',
 				'callbacks'						=> array()
 			),
 	
 			'target_url'					=> array(
 				'required'						=> false,
-				'data_type'						=> 'url',
+				'data_type'						=> 'string',
 				'callbacks'						=> array( 'owa_trackingEventHelpers::makeUrlCanonical' )
 			),
 			
@@ -239,7 +239,7 @@ class owa_baseModule extends owa_module {
 			
 			'session_referer'				=> array(
 				'required'						=> false,
-				'data_type'						=> 'url',
+				'data_type'						=> 'string',
 				'callbacks'						=> array()
 			),
 			// @todo investigate if this should be a required property so that a proper join can occur.
@@ -248,15 +248,7 @@ class owa_baseModule extends owa_module {
 				'callbacks'						=> array( 'owa_trackingEventHelpers::setSearchTerms' ),
 				'default_value'					=> '(not set)'
 			
-			),
-			
-			'attribs'						=> array(
-				'required'						=> false,
-				'data_type'						=> 'json',
-				'callbacks'						=> '',
-				'default_value'					=> ''
-			)
-				
+			)		
 		);
 		
 		$this->registerTrackingProperties( 'regular', $regular );
@@ -515,22 +507,10 @@ class owa_baseModule extends owa_module {
 			
 			$this->registerFilter('post_processed_tracking_event', $this, 'anonymizeIpAddress');
 		}
-		
-		$this->registerFilter('tracker_tag_cmds', $this, 'addTrackerCmds', 0);
-		
-		
-	}
-	
-	function addTrackerCmds( $cmds ) {
-		
-		$cmds[] = "owa_cmds.push(['trackPageView']);";
-		$cmds[] = "owa_cmds.push(['trackClicks']);";
-		
-		return $cmds;
 	}
 		
 	/**
-	 * Register Background jobs
+	 * Register Filters
 	 *
 	 * The following lines register background jobs used by the
 	 * background daemon. 

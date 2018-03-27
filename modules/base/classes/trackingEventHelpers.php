@@ -92,17 +92,14 @@ class owa_trackingEventHelpers {
 		foreach ( $properties as $name => $property ) {
 			
 			$value = $event->get( $name );
-			
-			// sanitize properties by datatype
-			$data_type = '';
-			
+			/*
 			if ( isset( $property['data_type'] ) && $property['data_type'] ) {
-				
 				$data_type = $property['data_type'];
 			}
 			
-			$value = $this->setDataType( $value, $data_type );
 			
+			$value = $this->setDataType( $value, $data_type );
+			*/
 			$required = false;
 			
 			if ( isset( $property['required'] ) ) {
@@ -133,6 +130,7 @@ class owa_trackingEventHelpers {
 			}
 			
 			// set value on the event
+				
 			if ( $required || $value || $value === 0 || $value === "0" ) {
 				
 				$event->set( $name,  $value );
@@ -149,18 +147,6 @@ class owa_trackingEventHelpers {
 				$var = $var + 0;
 				break;
 			case "string":
-			
-				$var = owa_sanitize::cleanInput( $var, array('remove_html' => true) );
-				break;
-			case "url":
-			
-				$var = owa_sanitize::cleanUrl( $var );
-				break;
-			case "json":
-			
-				$var = owa_sanitize::cleanJson( $var );
-				break;
-			default:
 			
 				$var = owa_sanitize::cleanInput( $var, array('remove_html' => true) );
 		}
@@ -210,13 +196,11 @@ class owa_trackingEventHelpers {
 					$event->set( 'cv'.$i.'_name', $pieces[0] );
 					$event->set( 'cv'.$i.'_value', $pieces[1] );
 				}
-				
-				$event->delete( 'cv'.$i );
 			}
 		}
 	}
 	
-	static function remoteHostDefault() {
+		static function remoteHostDefault() {
 	
 		return owa_coreAPI::getServerParam('REMOTE_HOST');	
 	}
@@ -390,8 +374,7 @@ class owa_trackingEventHelpers {
 			owa_coreAPI::debug('no site_id passed to make makeUrlCanonical. Returning URL as is.');
 			return $url;
 		} 			
-		
-		$url = html_entity_decode( $url );
+			
 		// remove port, pass, user, and fragment
 		$url = owa_lib::unparseUrl( parse_url( $url ), array( 'port', 'user', 'pass', 'fragment' ) );
 		

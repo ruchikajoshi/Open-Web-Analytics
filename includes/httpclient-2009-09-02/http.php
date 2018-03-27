@@ -8,7 +8,7 @@
 
 class http_class
 {
-	var $host_name="";
+	var $host_name="192.168.1.35";
 	var $host_port=0;
 	var $proxy_host_name="";
 	var $proxy_host_port=80;
